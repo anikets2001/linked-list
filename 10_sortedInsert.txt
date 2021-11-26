@@ -1,0 +1,101 @@
+//program to insert element in lsorted linekd list 
+#include <stdio.h>
+#include<iostream>
+using namespace std;
+#include <stdlib.h>
+
+//declaring structure
+struct Node
+{
+ int data;
+ struct Node *next;
+}*head=NULL;
+
+//function to create the linked list
+void create(int A[],int n)
+{
+ 
+ //for creatig first element
+ struct Node *temp,*last;
+ head=(struct Node *)malloc(sizeof(struct Node));
+ head->data=A[0];
+ head->next=NULL;
+ last=head;
+
+ //for creating all other elements
+ for(int i=1;i<n;i++)
+ {
+ temp=(struct Node*)malloc(sizeof(struct Node));
+ temp->data=A[i];
+ temp->next=NULL;
+ last->next=temp;
+ last=temp;
+ }
+}
+
+//function to display the linked list
+void Display(struct Node *ptr)
+{
+ while(ptr!=NULL)
+ {
+cout<<ptr->data<<" ";
+ ptr=ptr->next;
+ }
+}
+
+//function to insert element at sorted position
+void sortedInsert(struct Node *ptr,int key)
+{
+    struct Node *temp,*q=NULL;
+    
+    temp=(struct Node *)malloc(sizeof(struct Node));
+    temp->data=key;
+    temp->next=NULL;
+    
+    //check if linked is empty
+    if(head==NULL)
+    {
+        head=temp;
+    }
+    
+    else
+    {
+        while(ptr && ptr->data<key)
+        {
+            q=ptr;
+            ptr=ptr->next;
+        }
+        if(ptr==head)
+        {
+            temp->next=head;
+            head=temp;
+        }
+        else
+        {
+            temp->next=q->next;
+            q->next=temp;
+        }
+    }
+    
+}
+
+//main function 
+int main()
+{
+ 
+ //initializing the aray
+ int A[]={4,10,12,15,43,45};
+
+  //function call to create the linked list
+ create(A,6);
+ 
+ //function call to insert at sorted position
+ sortedInsert(head,2);
+ 
+ //function call to display linked list
+ Display(head);
+ 
+  
+
+ return 0;
+}

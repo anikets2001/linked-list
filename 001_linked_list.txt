@@ -1,0 +1,184 @@
+//program to create and display linked list
+#include<iostream>
+using namespace std;
+
+//declaring a structure
+struct node{
+    int data;
+    struct node *next;
+}*head=NULL;
+
+//function to create the linked list
+void create(int arr[],int n)
+{
+    //for cretaing first node
+    struct node *temp,*last;
+    head=new node;
+    head->data=arr[0];
+    head->next=NULL;
+    last=head;
+    
+    for(int i=1;i<n;i++)
+    {
+      temp=new node;
+      temp->data=arr[i];
+      temp->next=NULL;
+      last->next=temp;
+      last=temp;
+    }
+}
+
+
+
+//fucntion to display the linked list reversively by recursion
+void revDisplay(struct node *ptr)
+{
+    if(ptr!=NULL)
+    {
+        revDisplay(ptr->next);
+        cout<<ptr->data<<" ";
+    }
+}
+
+//function to count the number of nodes
+int countNode(struct node *ptr)
+{
+    int count=0;
+    while(ptr!=NULL)
+    {
+        count++;
+        ptr=ptr->next;
+    }
+    return count;
+}
+
+
+
+//function to count the number of nodes recursively
+int recCountNode(struct node *ptr)
+{
+    if(ptr!=NULL)
+    return recCountNode(ptr->next)+1;
+    
+    else
+    return 0;
+}
+
+//function to add node in linked list
+int insert(struct node *ptr,int pos,int x)
+{
+    struct node *temp;
+    temp=new node;
+    temp->data=x;
+    
+   if(pos<0 || pos>countNode(ptr))
+   {
+       return 0;
+   }
+   else
+   {
+       for(int i=0;i<pos-1;i++)
+       {
+           ptr=ptr->next;
+       }
+       temp->next=ptr->next;
+       ptr->next=temp;
+   }
+}
+
+//function to add node at last of linked list
+void insertLast(int x)
+{
+  struct node *temp,*last;
+  
+  temp=new node;
+  temp->data=x;
+  temp->next=NULL;
+  
+  if(head==NULL)       //empty list
+  {
+      head=last=temp;
+  }
+  else
+  {
+     last->next=temp;
+     last=temp;
+  }
+}
+
+//function to display the linked list
+void display(struct node *ptr)
+{
+    while(ptr!=NULL)
+    {
+        cout<<ptr->data<<" ";
+        ptr=ptr->next;
+    }
+}
+//function to find the sum of nodes
+int sumNode(struct node *ptr)
+{
+    int sum=0;
+    while(ptr!=NULL)
+    {
+        sum+=ptr->data;
+        ptr=ptr->next;
+    }
+    return sum;
+}
+
+//function to find sum of nodes recursively
+int recSumNodes(struct node *ptr)
+{
+    if(ptr==0)
+      return 0;
+     
+    else
+     return recSumNodes(ptr->next)+ptr->data;
+}
+
+//main function
+int main()
+{
+    int arr[]={4,3,2,5,12,13};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    
+    //function call to create the linked list  
+    create(arr,n);
+    
+    cout<<endl;
+    
+    //function call to insert the node 
+    insert(head,3,15);
+    
+    //function call to insert the element at last
+    insertLast(25);
+    
+    //function call to display the linked list
+    cout<<"linked list"<<endl;
+    display(head);
+    
+    cout<<endl;
+   
+     //function to display the linked list reversively
+    cout<<"reversed linked list by recursion reversibly"<<endl;
+    revDisplay(head);
+    
+    cout<<endl;
+    
+    //function call to count the number of nodes
+     int l=countNode(head);
+     cout<<"number of nodes are: "<<l<<endl;
+     
+     //function call to count number of nodes recursively
+     int l2=recCountNode(head);
+     cout<<"number of nodes by recursion are: "<<l2<<endl;
+     
+     //function call to sum of nodes
+     int sum=sumNode(head);
+     cout<<"sum of nodes: "<<sum<<endl;
+     
+     //function call to find sum of nodes recursivley
+    int sum2=recSumNodes(head);
+    cout<<"sum of nodes by recursion: "<<sum2<<endl;
+}

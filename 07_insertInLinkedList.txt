@@ -1,0 +1,102 @@
+//program to count the number of nodes in linked list
+#include <stdio.h>
+#include<iostream>
+using namespace std;
+#include <stdlib.h>
+
+//declaring structure
+struct Node
+{
+ int data;
+ struct Node *next;
+}*head=NULL;
+
+//function to create the linked list
+void create(int A[],int n)
+{
+ 
+ //for creatig first element
+ struct Node *temp,*last;
+ head=(struct Node *)malloc(sizeof(struct Node));
+ head->data=A[0];
+ head->next=NULL;
+ last=head;
+
+ //for creating all other elements
+ for(int i=1;i<n;i++)
+ {
+ temp=(struct Node*)malloc(sizeof(struct Node));
+ temp->data=A[i];
+ temp->next=NULL;
+ last->next=temp;
+ last=temp;
+ }
+}
+
+//function to display the linked list
+void Display(struct Node *ptr)
+{
+ while(ptr!=NULL)
+ {
+cout<<ptr->data<<" ";
+ ptr=ptr->next;
+ }
+}
+
+//function to count the count the number of nodes 
+int count(struct Node *ptr)
+{
+    int l=0;
+    while(ptr)
+    {
+        l++;
+        ptr=ptr->next;
+    }
+   return l;
+}
+
+
+//function to insert elements in linked list
+void insert (struct Node *ptr,int pos,int x)
+{
+    struct Node *temp;
+    if(pos<0 || pos>count(ptr))
+      return;
+    
+    temp=(struct Node *)malloc(sizeof (struct Node));
+    temp->data=x;
+    
+    if(pos==0)
+    {
+        temp->next=head;
+        head=temp;
+    }
+    
+    else 
+    {
+       for(int i=0;i<pos-1 && ptr;i++)
+       {
+           ptr=ptr->next;
+       }
+       temp->next=ptr->next;
+       ptr->next=temp;
+    }
+}
+
+//main function
+int main()
+{
+ 
+ //initializing the aray
+ int A[]={3,5,7};
+
+  //function call
+ create(A,3);
+ 
+  //function call to insert elements
+ insert(head,2,10);
+ 
+ //function call
+  Display(head);
+ return 0;
+}

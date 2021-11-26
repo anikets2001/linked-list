@@ -1,0 +1,56 @@
+//program to count the number of nodes in linked list
+#include <stdio.h>
+#include<iostream>
+using namespace std;
+#include <stdlib.h>
+
+//declaring structure
+struct Node
+{
+ int data;
+ struct Node *next;
+}*head=NULL;
+
+//function to display the linked list
+void Display(struct Node *ptr)
+{
+ while(ptr!=NULL)
+ {
+cout<<ptr->data<<" ";
+ ptr=ptr->next;
+ }
+}
+
+//function to insert elements at last of linked list
+void insertLast(int x)
+{
+    struct Node *last;
+    struct Node *temp;
+    temp=new node;
+    
+    temp->data=x;
+    temp->next=NULL;
+    
+    if(head==NULL)
+    {
+        head=last=temp;
+    }
+    
+    else
+    {
+        last->next=temp;
+        last=temp;
+    }
+}
+
+//main function
+int main()
+{
+  //function call to insert elements
+ insertLast(3);
+ insertLast(2);
+ 
+ //function call
+  Display(head);
+ return 0;
+}

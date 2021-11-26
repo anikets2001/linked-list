@@ -1,0 +1,76 @@
+//program to count the number of nodes in linked list
+#include <stdio.h>
+#include<iostream>
+using namespace std;
+#include <stdlib.h>
+
+//declaring structure
+struct Node
+{
+ int data;
+ struct Node *next;
+}*head=NULL;
+
+//function to display the linked list
+void Display(struct Node *ptr)
+{
+ while(ptr!=NULL)
+ {
+cout<<ptr->data<<" ";
+ ptr=ptr->next;
+ }
+}
+
+//function to count the count the number of nodes 
+int count(struct Node *ptr)
+{
+    int l=0;
+    while(ptr)
+    {
+        l++;
+        ptr=ptr->next;
+    }
+   return l;
+}
+
+
+//function to insert elements in linked list
+void insert (struct Node *ptr,int pos,int x)
+{
+    struct Node *temp;
+    if(pos<0 || pos>count(ptr))
+      return;
+    
+    temp=(struct Node *)malloc(sizeof (struct Node));
+    temp->data=x;
+    
+    if(pos==0)
+    {
+        temp->next=head;
+        head=temp;
+    }
+    
+    else 
+    {
+       for(int i=0;i<pos-1 && ptr;i++)
+       {
+           ptr=ptr->next;
+       }
+       temp->next=ptr->next;
+       ptr->next=temp;
+    }
+}
+
+//main function
+int main()
+{
+  //function call to insert elements
+ insert(head,0,10);
+ insert(head,1,20);
+ insert(head,0,5);
+ insert(head,3,30);
+ 
+ //function call
+  Display(head);
+ return 0;
+}

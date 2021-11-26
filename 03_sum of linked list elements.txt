@@ -1,0 +1,65 @@
+//program to find sum of all the ndes in a liked list
+#include<iostream>
+using namespace std;
+
+struct Node{
+    int data;
+    struct Node *next;
+}*head;
+
+//function to create the linked list
+void create(int arr[],int length)
+{
+    struct Node *last,*temp;
+    head=(struct Node*)malloc(sizeof(struct Node));
+    head->data=arr[0];
+    head->next=NULL;
+    last=head;
+    
+    for(int i=1;i<length;i++)
+    {
+        temp=(struct Node*)malloc(sizeof(struct Node));
+        temp->data=arr[i];
+        temp->next=NULL;
+        last->next=temp;
+        last=temp;
+    }
+}
+
+//iterative function to find the sum of elements in linked list
+int sumLinkedList(struct Node *ptr)
+{
+    int sum=0;
+    while(ptr!=NULL)
+    {
+      sum=sum+ptr->data; 
+      ptr=ptr->next;
+    }
+    return sum;
+}
+
+//function to find sum of linked list by recursion
+int recSumLinkedList(struct Node *ptr)
+{
+    if(ptr==0)
+    return 0;
+    
+    else
+    return recSumLinkedList(ptr->next)+ptr->data;
+}
+int main()
+{
+    int arr[]={5,3,6,2,6,3};
+    int length=sizeof(arr)/sizeof(arr[0]);
+    
+    //function call
+    create(arr,length);
+    
+    //function call to find sum
+    cout<<"sum is:"<<endl<<sumLinkedList(head);
+    
+    cout<<endl;
+    //function call to find sum by recursion
+    cout<<"sum is: "<<endl<<recSumLinkedList(head);
+    
+}

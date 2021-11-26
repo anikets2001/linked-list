@@ -1,0 +1,59 @@
+//program to Search the element in liked list by recursion
+#include<iostream>
+using namespace std;
+
+struct Node{
+    int data;
+    struct Node *next;
+}*head;
+
+//function to create the linked list
+void create(int arr[],int length)
+{
+    struct Node *last,*temp;
+    head=(struct Node*)malloc(sizeof(struct Node));
+    head->data=arr[0];
+    head->next=NULL;
+    last=head;
+    
+    for(int i=1;i<length;i++)
+    {
+        temp=(struct Node*)malloc(sizeof(struct Node));
+        temp->data=arr[i];
+        temp->next=NULL;
+        last->next=temp;
+        last=temp;
+    }
+}
+
+//function to search the Element recursively
+struct Node * recSearch(struct Node *ptr,int key)
+{
+    if(ptr==0)
+      return NULL;
+      
+    if(key==ptr->data)
+      return ptr;
+      
+    recSearch(ptr->next,key);  
+}
+
+int main()
+{
+    struct Node *temp;
+    int arr[]={5,3,6,2,6,3};
+    int length=sizeof(arr)/sizeof(arr[0]);
+    
+    temp=recSearch(head,3);
+    if(temp)
+    {
+        cout<<"Element found at "<<endl;
+        cout<<temp->data;
+    }
+    else
+    {
+        cout<<"Element not found in linked list"<<endl;
+    }
+   
+    
+}

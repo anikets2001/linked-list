@@ -1,0 +1,60 @@
+//program to find sum of all the ndes in a liked list
+#include<iostream>
+using namespace std;
+
+struct Node{
+    int data;
+    struct Node *next;
+}*head;
+
+//function to create the linked list
+void create(int arr[],int length)
+{
+    struct Node *last,*temp;
+    head=(struct Node*)malloc(sizeof(struct Node));
+    head->data=arr[0];
+    head->next=NULL;
+    last=head;
+    
+    for(int i=1;i<length;i++)
+    {
+        temp=(struct Node*)malloc(sizeof(struct Node));
+        temp->data=arr[i];
+        temp->next=NULL;
+        last->next=temp;
+        last=temp;
+    }
+}
+
+//function to do linear search in linked list
+struct Node* Search(struct Node *ptr,int key)
+{
+    while(ptr!=NULL)
+    {
+        if(key==ptr->data)
+        return ptr;
+        
+        ptr=ptr->next;
+    }
+    return NULL;
+}
+
+int main()
+{
+    struct Node *temp;
+    int arr[]={5,3,6,2,6,3};
+    int length=sizeof(arr)/sizeof(arr[0]);
+    
+    temp=Search(head,3);
+    if(temp)
+    {
+        cout<<"Element found at "<<endl;
+        cout<<temp->data;
+    }
+    else
+    {
+        cout<<"Element not found in linked list"<<endl;
+    }
+   
+    
+}

@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include<iostream>
+using namespace std;
+#include <stdlib.h>
+
+//declaring structure
+struct Node
+{
+ int data;
+ struct Node *next;
+}*head=NULL;
+
+//function to create the linked list
+void create(int A[],int n)
+{
+ 
+ //for creatig first element
+ struct Node *temp,*last;
+ head=(struct Node *)malloc(sizeof(struct Node));
+ head->data=A[0];
+ head->next=NULL;
+ last=head;
+
+ //for creating all other elements
+ for(int i=1;i<n;i++)
+ {
+ temp=(struct Node*)malloc(sizeof(struct Node));
+ temp->data=A[i];
+ temp->next=NULL;
+ last->next=temp;
+ last=temp;
+ }
+}
+
+//function to display the linked list
+void Display(struct Node *ptr)
+{
+ while(ptr!=NULL)
+ {
+cout<<ptr->data<<" ";
+ ptr=ptr->next;
+ }
+}
+
+// function to dispay the linked list by recursion
+void recDisplay(struct Node *ptr)
+{
+ if(ptr!=NULL)
+ {
+ recDisplay(ptr->next);
+ 
+cout<<ptr->data<<" ";
+
+ }
+}
+
+//main function 
+int main()
+{
+ 
+ //initializing the aray
+ int A[]={3,5,7,10,25,8,32,2};
+
+  //function call
+ create(A,8);
+ 
+ cout<<"Displaying linked list by iterative method"<<endl;
+ Display(head);
+ 
+  //line break
+  cout<<endl;
+
+  cout<<"Displaying reversed linked list"<<endl;
+  recDisplay(head);
+
+ return 0;
+}
